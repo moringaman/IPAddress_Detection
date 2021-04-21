@@ -1,8 +1,6 @@
 import React, { useReducer, useState } from 'react'
-// import FlagIconFactory from 'react-flag-icon-css'
 import useIpAddress  from '../hooks/useIpAddress' 
 import ipReducer from '../reducers/ipReducer'
-import axios from 'axios'
 import { IpAddress, Country, UploadButton} from './'
 import '../styles/main.css'
 
@@ -20,16 +18,24 @@ const [progress, setProgress ] = useState({})
 
  const handleUpload = async() => {
 
-    const data = {
-        // id: '2383982',
+    
+    const raw = {
         ipAddress : ipAddress,
         countryName: countryName
+    }
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(raw)
     }
 
         setProgress({message: 'Uploading IP Data'})
     try {
         //upload
-        await axios.post('http://localhost:3001/ipData', data)
+        await fetch('http://localhost:3001/ipData', options )
         setProgress({message: 'IP Data Uploaded'})
     } catch(err) {
         //display error
