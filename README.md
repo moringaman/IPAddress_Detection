@@ -14,4 +14,4 @@ For this app to run you will need to start both the client and the server withh 
 
 ### Mock API 
 
-1. Run 'npx json-server --watch db.json --port 3001'
+1. Run `npx json-server --watch db.json --port 3001`
